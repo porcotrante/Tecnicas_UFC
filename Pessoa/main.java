@@ -3,21 +3,9 @@ class main{
         Pessoa joao;
         Pessoa maria;
 
-        joao = new Pessoa();
-        maria = new Pessoa();
+        joao = new Pessoa("joão", "123");
+        maria = new Pessoa("maria", "321");
 
-        joao.nome = "João";
-        maria.nome = "Maria";
-        joao.cpf = "111.111.111-11";
-        maria.cpf = "222.222.222-22";
-        joao.idade = 19;
-        maria.idade = 17;
-
-        Casamento.casar(joao,maria);
-
-        System.out.println(joao.conjuge.nome);
-        System.out.println(maria.conjuge.nome);
-
-        Casamento.divorcio(joao,maria);
+        System.out.println(joao.nome + " " + joao.cpf);
     }
 }

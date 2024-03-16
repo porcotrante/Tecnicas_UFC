@@ -4,11 +4,9 @@ class Pessoa {
     int idade;
     Pessoa conjuge;
 
-    public static void andar (int i) {
-        System.out.println("Andei");
-    }
+    Pessoa(String nome, String cpf){
+        this.nome = nome;
 
-    public static void respirar () {
-
+        this.cpf = cpf;
     }
 }
