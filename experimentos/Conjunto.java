@@ -32,7 +32,7 @@ public class Conjunto {
         return false;
     }
 
-    public boolean sub(Conjunto c){
+    public boolean subCon(Conjunto c){
         if (this.elementos.length < c.elementos.length) {
             return false;
         }
@@ -78,7 +78,15 @@ public class Conjunto {
         return ic;
     }
 
-    /*public static Conjunto dif(Conjunto c1, Conjunto c2){
+    public static Conjunto dif(Conjunto c1, Conjunto c2){
+        Conjunto dc = new Conjunto();
 
-    }*/
+        for(int i = 0; i < c1.elementos.length; i++){
+            if (!c2.pertence(c1.elementos[i])) {
+                dc.inserir(c1.elementos[i]);
+            }
+        }
+
+        return dc;
+    }
 }
