@@ -1,18 +1,29 @@
 public class Conjunto {
-    int elementos[];
+    Object elementos[];
 
-    Conjunto(int elementos[]){
+    Conjunto(Object elementos[]){
         this.elementos = elementos.clone();
     }
 
     Conjunto(){
-        int aux[] = {};
+        Object aux[] = {};
 
         this.elementos = aux.clone();
+
+        aux = null;
     }
 
-    public void inserir(int n){
-        int aux[] = new int[this.elementos.length + 1];
+    public boolean pertence(Object n){
+        for(int i = 0; i < this.elementos.length; i++){
+            if (n.equals(this.elementos[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void inserir(Object n){
+        Object aux[] = new Object[this.elementos.length + 1];
 
         for(int i = 0; i < this.elementos.length; i++){
             aux[i] = this.elementos[i];
@@ -21,15 +32,8 @@ public class Conjunto {
         aux[aux.length - 1] = n;
 
         this.elementos = aux.clone();
-    }
 
-    public boolean pertence(int n){
-        for(int i = 0; i < this.elementos.length; i++){
-            if (n == this.elementos[i]) {
-                return true;
-            }
-        }
-        return false;
+        aux = null;
     }
 
     public boolean subCon(Conjunto c){
@@ -88,5 +92,45 @@ public class Conjunto {
         }
 
         return dc;
+    }
+
+    public static Conjunto conjuntoPotencia(Conjunto c0, Conjunto c){
+        boolean aux = true;
+
+        if (c0.elementos.length == 0) {
+            c0.inserir(c);
+        }
+        else{
+            for (Object e : c0.elementos) {
+                if (((Conjunto)e).subCon(c) && c.subCon((Conjunto)e)) {
+                    aux = false;
+                }
+            }
+            if (aux) {
+                c0.inserir(c);
+            }
+        }
+
+        for(int i = 0; i < c.elementos.length; i++){
+            if (c.elementos.length > 0) {
+                c0 = conjuntoPotencia(c0, Conjunto.dif(c, new Conjunto(new Object[]{c.elementos[i]})));
+            }
+        }
+
+        return c0;
+    }
+
+    public static Conjunto cartesiano(Conjunto c1, Conjunto c2){
+        Conjunto pc = new Conjunto();
+
+        for (int i = 0; i < c1.elementos.length; i++){
+            for(int j = 0; j < c2.elementos.length; j++){
+                pc.inserir(Conjunto.uniao(
+                                        new Conjunto(new Object[]{c1.elementos[i]}),
+                                        new Conjunto(new Object[]{c2.elementos[j]})));
+            }
+        }
+
+        return pc;
     }
 }
